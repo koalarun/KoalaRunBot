@@ -1,11 +1,6 @@
-/BOSS/VisualStudio/*.props
 /KoalaRunBot/bin
 /KoalaRunBot/Debug
 /KoalaRunBot/Release
 /KoalaRunBot/*.opensdf
 /KoalaRunBot/*.sdf
-/KoalaRunBot/Steamhammer/*.props
-/KoalaRunBot/KoalaRunDll/*.props
-/KoalaRunBot/KoalaRunClient/*.props
-/KoalaRunBot/KoalaRunBotCore/*.props
 /KoalaRunBot/*.suo
