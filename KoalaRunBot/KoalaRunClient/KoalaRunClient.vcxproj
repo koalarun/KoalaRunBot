@@ -35,11 +35,9 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="PropertySheet.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="PropertySheet.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -57,13 +55,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(BWAPI_DIR)/include;$(BWTA_DIR)/include;../../BOSS/source;../Steamhammer/source;../KoalaRunBotCore/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BWAPI_412_DIR)/include;$(BWTA_22_DIR)/include;../../BOSS/source;../Steamhammer/source;../KoalaRunBotCore/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(BWAPI_DIR)/lib/BWAPId.lib;$(BWAPI_DIR)/lib/BWAPIClientd.lib;$(BWTA_DIR)/lib/BWTAd.lib;$(BWTA_DIR)/lib/libboost_system-vc120-mt-gd-1_56.lib;$(BWTA_DIR)/lib/libboost_thread-vc120-mt-gd-1_56.lib;$(BWTA_DIR)/lib/libCGAL-vc120-mt-gd-4.4.lib;$(BWTA_DIR)/lib/libgmp-10.lib;$(BWTA_DIR)/lib/libmpfr-4.lib;$(BWTA_DIR)/lib/libboost_filesystem-vc120-mt-gd-1_56.lib;../../BOSS/bin/BOSS_d.lib;../bin/Steamhammer_d.lib;../bin/KoalaRunBotCore_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(BWAPI_412_DIR)/lib/BWAPId.lib;$(BWAPI_412_DIR)/lib/BWAPIClientd.lib;$(BWTA_22_DIR)/lib/BWTAd.lib;$(BWTA_22_DIR)/lib/libboost_system-vc120-mt-gd-1_56.lib;$(BWTA_22_DIR)/lib/libboost_thread-vc120-mt-gd-1_56.lib;$(BWTA_22_DIR)/lib/libCGAL-vc120-mt-gd-4.4.lib;$(BWTA_22_DIR)/lib/libgmp-10.lib;$(BWTA_22_DIR)/lib/libmpfr-4.lib;$(BWTA_22_DIR)/lib/libboost_filesystem-vc120-mt-gd-1_56.lib;../../BOSS/bin/BOSS_d.lib;../bin/Steamhammer_d.lib;../bin/KoalaRunBotCore_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
