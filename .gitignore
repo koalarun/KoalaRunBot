@@ -2,3 +2,9 @@
 /KoalaRunBot/VisualStudio/Debug
 /KoalaRunBot/VisualStudio/Release
 /KoalaRunBot/VisualStudio/*.sdf
+/KoalaRunBot/VisualStudio/*.suo
+/KoalaRunBot/VisualStudio/KoalaRunBotCore/*.props
+/KoalaRunBot/VisualStudio/KoalaRunClient/*.props
+/KoalaRunBot/VisualStudio/KoalaRunDll/*.props
+/KoalaRunBot/VisualStudio/*.props
+/BOSS/VisualStudio/*.props
