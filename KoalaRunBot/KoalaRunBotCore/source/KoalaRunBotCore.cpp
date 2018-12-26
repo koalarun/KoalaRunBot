@@ -16,6 +16,7 @@ void KoalaRunBotCore::onStart() {
   Broodwar->printf("--printf--: Hello world!");
   Broodwar->sendText("--sendText--: Hello world!");
 
+
   // Set the command optimization level so that common commands can be grouped
   // and reduce the bot's APM (Actions Per Minute).
   Broodwar->setCommandOptimizationLevel(2);
@@ -49,12 +50,16 @@ void KoalaRunBotCore::onFrame() {
         if (!train_worker_success) {
           last_err = Broodwar->getLastError();
           Position pos = u->getPosition();
-          Broodwar->registerEvent([pos, last_err](Game*){ Broodwar->drawTextMap(pos, "%c%s", Text::White, last_err.c_str()); },   // action
-            nullptr,    // condition
-            Broodwar->getLatencyFrames());
+          Broodwar->registerEvent([pos, last_err](Game*) {
+                                    Broodwar->drawTextMap(pos, "%c%s", Text::White, last_err.c_str());
+                                  }, // action
+                                  nullptr, // condition
+                                  Broodwar->getLatencyFrames());
         }
       }
-    }else if (u->getType().isWorker()) {//worker to gather mineral
+    }
+    else if (u->getType().isWorker()) {
+      //worker to gather mineral
       if (u->isIdle()) {
         if (u->isCarryingGas() || u->isCarryingMinerals()) {
           u->returnCargo();
@@ -84,21 +89,29 @@ void KoalaRunBotCore::onFrame() {
     }
     else {
       //find a worker
-      Unit supply_builder = Broodwar->self()->getUnits().getClosestUnit(Filter::IsWorker && 
+      Unit supply_builder = Broodwar->self()->getUnits().getClosestUnit(Filter::IsWorker &&
         (Filter::IsIdle || Filter::IsGatheringMinerals));
       if (supply_builder != nullptr) {
         const TilePosition build_location = Broodwar->getBuildLocation(supply_type, supply_builder->getTilePosition());
         if (build_location != TilePositions::Unknown) {
           supply_builder->build(supply_type, build_location);
         }
-        
       }
-      
     }
   }
 
-}
+  //build barracks
+  //Broodwar->self()->get
+  for (auto region : Broodwar->getAllRegions()) {
+    BWAPI::Broodwar->drawLineMap(region->getBoundsLeft(), region->getBoundsBottom(), 
+      region->getBoundsRight(), region->getBoundsBottom(), BWAPI::Colors::Blue);
 
+    BWAPI::Broodwar->drawLineMap(region->getBoundsRight(), region->getBoundsBottom(),
+      region->getBoundsRight(), region->getBoundsTop(), BWAPI::Colors::Blue);
+  }
+  
+  
+}
 
 
 void KoalaRunBotCore::onUnitDestroy(BWAPI::Unit unit) {}
