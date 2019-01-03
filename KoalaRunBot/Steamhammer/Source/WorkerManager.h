@@ -40,7 +40,7 @@ namespace KoalaRunBot {
     void onUnitDestroy(BWAPI::Unit unit);
     void onUnitMorph(BWAPI::Unit unit);
     void onUnitShow(BWAPI::Unit unit);
-    void onUnitRenegade(BWAPI::Unit unit);
+    // void onUnitRenegade(BWAPI::Unit unit);
 
     void finishedWithWorker(BWAPI::Unit unit);
 
@@ -58,7 +58,7 @@ namespace KoalaRunBot {
     void setScoutWorker(BWAPI::Unit worker);
 
     // NOTE _collectGas == false allows that a little more gas may still be collected.
-    bool isCollectingGas() { return collect_gas_; };
+    bool isCollectingGas() const { return collect_gas_; };
     void setCollectGas(bool collectGas) { collect_gas_ = collectGas; };
 
     bool isWorkerScout(BWAPI::Unit worker);
