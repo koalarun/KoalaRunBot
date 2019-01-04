@@ -36,13 +36,13 @@ void KoalaRunBotCore::onStart() {
 
 void KoalaRunBotCore::onEnd(bool isWinner) { }
 
-void KoalaRunBotCore::BuildSupply(int supply_in_build_count, Error last_err) {
+void KoalaRunBotCore::BuildSupply(int supply_in_build_count) {
   //supply
   static int supply_last_checked = 0;
   UnitType supply_type = Broodwar->self()->getRace().getSupplyProvider();
   // if (Broodwar->self()->minerals() > supply_type->)
-  if (last_err == Errors::Insufficient_Supply &&
-    supply_last_checked + 200 < Broodwar->getFrameCount() &&
+  if (supply_last_checked + 200 < Broodwar->getFrameCount() &&
+    Broodwar->self()->supplyTotal() - Broodwar->self()->supplyUsed() < 2 &&
     supply_in_build_count == 0) {
 
     supply_last_checked = Broodwar->getFrameCount();
@@ -51,7 +51,9 @@ void KoalaRunBotCore::BuildSupply(int supply_in_build_count, Error last_err) {
     if (supply_builder_type == UnitTypes::Zerg_Larva) {
       //find a larva
       Unit larva = Broodwar->self()->getUnits().getLarva().getClosestUnit();
-      larva->train(supply_type);
+      if (larva != nullptr) {
+        larva->train(supply_type);
+      }
     }
     else {
       //find a worker
@@ -94,6 +96,7 @@ void KoalaRunBotCore::onFrame() {
 
   Unitset depots;
   Unitset workers;
+  Unitset fighters;
   Unit pool = nullptr;
   int carry_gas_worker_count = 0;
   int supply_in_build_count = 0;
@@ -120,6 +123,9 @@ void KoalaRunBotCore::onFrame() {
     }
     else if (u->getType() == UnitTypes::Zerg_Spawning_Pool) {
       pool = u;
+    }
+    else if (u->getType() == UnitTypes::Zerg_Zergling) {
+      fighters.insert(u);
     }
   }
 
@@ -152,7 +158,7 @@ void KoalaRunBotCore::onFrame() {
     }
   }
 
-  BuildSupply(supply_in_build_count, last_err);
+  BuildSupply(supply_in_build_count);
 
   if (Broodwar->self()->getRace() == Races::Zerg) {
     bool is_build_pool = IsZergAlreadyBuildPool();
@@ -250,9 +256,31 @@ void KoalaRunBotCore::onFrame() {
         const bool train_success = depot->train(UnitTypes::Zerg_Zergling);
         if (!train_success) {
           last_err = GetAndShowLastError(depot);
-          BuildSupply(supply_in_build_count, last_err);
+          BuildSupply(supply_in_build_count);
         }
         
+      }
+    }
+
+    //attack
+    static int attack_last_check = 0;
+    if (attack_last_check + 200 < Broodwar->getFrameCount() &&
+      fighters.size() >= 24) {
+
+      attack_last_check = Broodwar->getFrameCount();
+
+      TilePosition self_location = Broodwar->self()->getStartLocation();
+      TilePosition enemy_location;
+			//find enemy position
+      for (BWAPI::TilePosition pos : Broodwar->getStartLocations()) {
+        if (pos != self_location) {
+          enemy_location = pos;
+          break;
+        }
+      }
+
+      for (auto fighter : fighters) {
+        fighter->attack(Position(enemy_location));
       }
     }
 

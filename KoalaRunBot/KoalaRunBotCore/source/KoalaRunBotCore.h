@@ -8,7 +8,7 @@ namespace KoalaRunBot {
     void onStart();
     void onFrame();
     void onEnd(bool isWinner);
-    void BuildSupply(int supply_in_build_count, BWAPI::Error last_err);
+    void BuildSupply(int supply_in_build_count);
     BWAPI::Error GetAndShowLastError(BWAPI::UnitInterface*const& u);
     void ProductWorker(BWAPI::Error& last_err);
     void ProductWorker(BWAPI::Error& last_err, BWAPI::UnitInterface*const& u);
