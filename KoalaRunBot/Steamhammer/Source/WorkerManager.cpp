@@ -186,7 +186,7 @@ void WorkerManager::handleGasWorkers()
 				{
 					// This is a good refinery. Gather from it.
 					// If too few workers are assigned, add more.
-					int numAssigned = worker_data_.getNumAssignedWorkers(geyser);
+					int numAssigned = worker_data_.ComputeAssignedWorkersNum(geyser);
 					for (int i = 0; i < (Config::Macro::WorkersPerRefinery - numAssigned); ++i)
 					{
 						BWAPI::Unit gasWorker = getGasWorker(geyser);
@@ -203,7 +203,7 @@ void WorkerManager::handleGasWorkers()
 				else
 				{
 					// The refinery is gone or otherwise no good. Remove any gas workers.
-					std::set<BWAPI::Unit> gasWorkers = worker_data_.GetGasWorkers();
+					std::set<BWAPI::Unit> gasWorkers = worker_data_.FindGasWorkers();
 					for (const auto gasWorker : gasWorkers)
 					{
 						if (geyser == worker_data_.GetWorkerResource(gasWorker) &&
@@ -219,7 +219,7 @@ void WorkerManager::handleGasWorkers()
 	else
 	{
 		// Don't gather gas: If workers are assigned to gas anywhere, take them off.
-		std::set<BWAPI::Unit> gasWorkers = worker_data_.GetGasWorkers();
+		std::set<BWAPI::Unit> gasWorkers = worker_data_.FindGasWorkers();
 		for (const auto gasWorker : gasWorkers)
 		{
 			if (gasWorker->getOrder() != BWAPI::Orders::HarvestGas)    // not inside the refinery
@@ -879,7 +879,7 @@ void WorkerManager::onUnitDestroy(BWAPI::Unit unit)
 
 	if (unit->getType().isResourceDepot() && unit->getPlayer() == BWAPI::Broodwar->self())
 	{
-		worker_data_.RemoveDepot(unit);
+		worker_data_.DepotDestroyed(unit);
 	}
 
 	if (unit->getType().isWorker() && unit->getPlayer() == BWAPI::Broodwar->self()) 
@@ -941,6 +941,10 @@ void WorkerManager::drawWorkerInformation(int x, int y)
 		BWAPI::Broodwar->drawTextScreen(x, y+40+((yspace)*10), "\x03 %d", unit->getID());
 		BWAPI::Broodwar->drawTextScreen(x+50, y+40+((yspace++)*10), "\x03 %c", worker_data_.GetJobCode(unit));
 	}
+}
+
+int WorkerManager::GetNumTotalWorkers() {
+  return worker_data_.GetWorkersTotalNum();
 }
 
 bool WorkerManager::isFree(BWAPI::Unit worker)

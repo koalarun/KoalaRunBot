@@ -2,8 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="source\KoalaRunBotCore.cpp" />
+    <ClCompile Include="source\UnitChangeHandle.cpp" />
+    <ClCompile Include="source\WorkerCenter.cpp" />
+    <ClCompile Include="source\ResourceDepotCenter.cpp" />
+    <ClCompile Include="source\StrategyCenter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\KoalaRunBotCore.h" />
+    <ClInclude Include="source\UnitChangeHandle.h" />
+    <ClInclude Include="source\WorkerCenter.h" />
+    <ClInclude Include="source\ResourceDepotCenter.h" />
+    <ClInclude Include="source\StrategyCenter.h" />
   </ItemGroup>
 </Project>

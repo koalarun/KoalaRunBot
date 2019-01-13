@@ -23,8 +23,8 @@ void connectLoop() {
 }
 
 void gameLoop() {
-  // std::shared_ptr<KoalaRunBotCore> bot_core(new KoalaRunBotCore());
   std::shared_ptr<KoalaRunBotCore> bot_core(new KoalaRunBotCore());
+  //std::shared_ptr<BotCore> bot_core(new BotCore());
 
   while (Broodwar->isInGame()) {
     for (auto& e : Broodwar->getEvents()) {

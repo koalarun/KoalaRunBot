@@ -48,6 +48,7 @@ namespace KoalaRunBot {
     void updateWorkerStatus();
     void drawWorkerInformation(int x, int y);
 
+    int GetNumTotalWorkers();
     int getNumMineralWorkers() const;
     int getNumGasWorkers() const;
     int getNumReturnCargoWorkers() const;

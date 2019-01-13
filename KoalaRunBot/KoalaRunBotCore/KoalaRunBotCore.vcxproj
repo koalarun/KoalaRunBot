@@ -11,10 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\ResourceDepotCenter.cpp" />
     <ClCompile Include="source\KoalaRunBotCore.cpp" />
+    <ClCompile Include="source\StrategyCenter.cpp" />
+    <ClCompile Include="source\UnitChangeHandle.cpp" />
+    <ClCompile Include="source\WorkerCenter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\ResourceDepotCenter.h" />
     <ClInclude Include="source\KoalaRunBotCore.h" />
+    <ClInclude Include="source\StrategyCenter.h" />
+    <ClInclude Include="source\UnitChangeHandle.h" />
+    <ClInclude Include="source\WorkerCenter.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{212FEEC5-E011-46E1-A300-7A9E7A2F35C6}</ProjectGuid>
