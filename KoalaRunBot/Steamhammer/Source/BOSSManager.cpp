@@ -116,8 +116,8 @@ void BOSSManager::update(double timeLimit) {
   _previousStatusDesc.clear();
 
   // give the search at least 5ms to search this frame
-  double realTimeLimit = timeLimit < 5 ? 5 : timeLimit;
-  _smartSearch->setTimeLimit((int)realTimeLimit);
+  const double realTimeLimit = timeLimit < 5 ? 5 : timeLimit;
+  _smartSearch->setTimeLimit(static_cast<int>(realTimeLimit));
   bool caughtException = false;
 
   try {
@@ -129,23 +129,23 @@ void BOSSManager::update(double timeLimit) {
     if (Config::Debug::DrawBuildOrderSearchInfo) {
       BWAPI::Broodwar->drawTextScreen(0, 0, "Search didn't find a solution, resorting to Naive Build Order");
     }
-    _previousStatusDesc = "BOSSExeption";
+    _previousStatusDesc = "BOSSException";
     caughtException = true;
   }
 
   _totalPreviousSearchTime += _smartSearch->getResults().timeElapsed;
 
   // after the search finishes for this frame, check to see if we have a solution or if we hit the overall time limit
-  bool searchTimeOut = (BWAPI::Broodwar->getFrameCount() > (_previousSearchStartFrame + Config::Macro::BOSSFrameLimit));
-  bool previousSearchComplete = searchTimeOut || _smartSearch->getResults().solved || caughtException;
+  const bool searchTimeOut = (BWAPI::Broodwar->getFrameCount() > (_previousSearchStartFrame + Config::Macro::BOSSFrameLimit));
+  const bool previousSearchComplete = searchTimeOut || _smartSearch->getResults().solved || caughtException;
   if (!previousSearchComplete) 
     return;
 
-  bool solved = _smartSearch->getResults().solved && _smartSearch->getResults().solutionFound;
+  const bool solved = _smartSearch->getResults().solved && _smartSearch->getResults().solutionFound;
 
   // if we've found a solution, let us know
   if (Config::Debug::DrawBuildOrderSearchInfo && _smartSearch->getResults().solved) {
-    BWAPI::Broodwar->printf("Build order SOLVED in %d nodes", (int)_smartSearch->getResults().nodesExpanded);
+    BWAPI::Broodwar->printf("Build order SOLVED in %d nodes", static_cast<int>(_smartSearch->getResults().nodesExpanded));
   }
 
   if (_smartSearch->getResults().solved) {
@@ -168,7 +168,7 @@ void BOSSManager::update(double timeLimit) {
     _previousStatusDesc = std::string("\x07") + "BOSS Trivial Solve\n";
   }
 
-  if (solved || _previousBuildOrder.size() != 0) 
+  if (solved || !_previousBuildOrder.empty()) 
     return;
 
   // if our search resulted in a build order of size 0 then something failed
@@ -268,7 +268,7 @@ std::vector<MacroAct> BOSSManager::GetMetaVector(const BOSS::BuildOrder& buildOr
 }
 
 
-BuildOrder BOSSManager::getBuildOrder() {
+BuildOrder BOSSManager::getBuildOrder() const {
   return BuildOrder(BWAPI::Broodwar->self()->getRace(), GetMetaVector(_previousBuildOrder));
 }
 
@@ -295,13 +295,16 @@ MacroAct BOSSManager::GetMacroAct(const BOSS::ActionType& a) {
   if (a.isUnit()) {
     return MacroAct(a.getUnitType());
   }
-  else if (a.isUpgrade()) {
+
+  if (a.isUpgrade()) {
     return MacroAct(a.getUpgradeType());
   }
-  else if (a.isTech()) {
+
+  if (a.isTech()) {
     return MacroAct(a.getTechType());
   }
-  else {
+
+  {
     UAB_ASSERT(false, "Should have found a valid type here");
   }
 

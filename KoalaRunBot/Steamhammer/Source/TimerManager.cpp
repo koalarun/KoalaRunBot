@@ -36,13 +36,13 @@ void TimerManager::stopTimer(const TimerManager::Type t)
 	if (t == Total)
 	{
 		++_count;
-		double ms = getMilliseconds();
+		double ms = getTotalMilliseconds();
 		_maxMilliseconds = std::max(_maxMilliseconds, ms);
 		_totalMilliseconds += ms;
 	}
 }
 
-double TimerManager::getMilliseconds()
+double TimerManager::getTotalMilliseconds()
 {
 	return _timers[Total].getElapsedTimeInMilliSec();
 }

@@ -17,7 +17,7 @@ namespace KoalaRunBot {
     bool _searchInProgress;
     double _totalPreviousSearchTime;
     std::vector<MetaPair> _previousGoalUnits;
-    std::string _previousStatus;
+    std::string _previousStatusDesc;
 
     SearchPtr _smartSearch;
 
@@ -35,7 +35,6 @@ namespace KoalaRunBot {
 
     std::vector<std::vector<MacroAct>> openingBook;
     const BOSS::RaceID getRace() const;
-
     void logBadSearch();
 
     BOSSManager();
@@ -47,7 +46,7 @@ namespace KoalaRunBot {
     void update(double timeLimit);
     void reset();
 
-    BuildOrder getBuildOrder();
+    BuildOrder getBuildOrder() const;
     bool isSearchInProgress();
 
     void startNewSearch(const std::vector<MetaPair>& goalUnits);

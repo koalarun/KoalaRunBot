@@ -97,10 +97,12 @@ const MetaPairVector StrategyManager::getBuildOrderGoal() {
   if (_selfRace == BWAPI::Races::Protoss) {
     return getProtossBuildOrderGoal();
   }
-  else if (_selfRace == BWAPI::Races::Terran) {
+
+  if (_selfRace == BWAPI::Races::Terran) {
     return getTerranBuildOrderGoal();
   }
-  else if (_selfRace == BWAPI::Races::Zerg) {
+
+  if (_selfRace == BWAPI::Races::Zerg) {
     return getZergBuildOrderGoal();
   }
 
