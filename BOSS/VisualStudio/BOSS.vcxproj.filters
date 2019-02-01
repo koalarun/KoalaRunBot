@@ -222,6 +222,9 @@
     <ClInclude Include="..\source\BOSSException.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\rapidjson\internal\pow10.h" />
+    <ClInclude Include="..\source\rapidjson\internal\stack.h" />
+    <ClInclude Include="..\source\rapidjson\internal\strfunc.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">

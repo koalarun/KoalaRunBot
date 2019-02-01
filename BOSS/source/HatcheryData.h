@@ -10,42 +10,39 @@
 #include "Array.hpp"
 #include "ActionType.h"
 
-namespace BOSS
-{
+namespace BOSS {
 
-class Hatchery
-{ 
-    UnitCountType           _numLarva;
-	
-public:
-	
-	Hatchery(const UnitCountType & numLarva);
-	Hatchery();
+  class Hatchery {
+    UnitCountType _numLarva;
 
-       
-    void                    useLarva();
-    void                    fastForward(const FrameCountType & currentFrame, const FrameCountType & toFrame);
+  public:
 
-    const UnitCountType &   numLarva() const;
-};
+    Hatchery(const UnitCountType& numLarva);
+    Hatchery();
 
-class HatcheryData
-{
+
+    void useLarva();
+    void fastForward(const FrameCountType& currentFrame, const FrameCountType& toFrame);
+
+    const UnitCountType& numLarva() const;
+  };
+
+  class HatcheryData {
     Vec<Hatchery, Constants::MAX_HATCHERIES> _hatcheries;
 
-public:
+  public:
 
     HatcheryData();
 
-    void                    addHatchery(const UnitCountType & numLarva);
-	void                    removeHatchery();
-    void                    useLarva();
-    void                    fastForward(const FrameCountType & currentFrame, const FrameCountType & toFrame);
+    void addHatchery(const UnitCountType& numLarva);
+    void removeHatchery();
+    void useLarva();
+    void fastForward(const FrameCountType& currentFrame, const FrameCountType& toFrame);
 
-    const FrameCountType    nextLarvaFrameAfter(const FrameCountType & currentFrame) const;
-    const UnitCountType     numLarva() const;
-    const UnitCountType     size() const;
-    const Hatchery &        getHatchery(const UnitCountType & index) const;
-};
+    const FrameCountType nextLarvaFrameAfter(const FrameCountType& currentFrame) const;
+    const UnitCountType numLarva() const;
+    const UnitCountType size() const;
+    const Hatchery& getHatchery(const UnitCountType& index) const;
+  };
 
 }

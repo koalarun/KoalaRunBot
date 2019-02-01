@@ -47,6 +47,9 @@
     <ClInclude Include="..\source\JSONTools.h" />
     <ClInclude Include="..\source\NaiveBuildOrderSearch.h" />
     <ClInclude Include="..\source\PrerequisiteSet.h" />
+    <ClInclude Include="..\source\rapidjson\internal\pow10.h" />
+    <ClInclude Include="..\source\rapidjson\internal\stack.h" />
+    <ClInclude Include="..\source\rapidjson\internal\strfunc.h" />
     <ClInclude Include="..\source\Timer.hpp" />
     <ClInclude Include="..\source\Tools.h" />
     <ClInclude Include="..\source\UnitData.h" />

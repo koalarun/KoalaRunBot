@@ -10,62 +10,56 @@
 
 #define DFBB_TIMEOUT_EXCEPTION 1
 
-namespace BOSS
-{
+namespace BOSS {
 
-class StackData
-{
-public:
+  class StackData {
+  public:
 
-    size_t              currentChildIndex;
-    GameState           state;
-    ActionSet           legalActions;
-    ActionType          currentActionType;
-    UnitCountType       repetitionValue;
-    UnitCountType       completedRepetitions;
-    
+    size_t currentChildIndex;
+    GameState state;
+    ActionSet legalActions;
+    ActionType currentActionType;
+    UnitCountType repetitionValue;
+    UnitCountType completedRepetitions;
+
     StackData()
-        : currentChildIndex(0)
+      : currentChildIndex(0)
         , repetitionValue(1)
-        , completedRepetitions(0)
-    {
-    
-    }
-};
+        , completedRepetitions(0) { }
+  };
 
-class DFBB_BuildOrderStackSearch
-{
-	DFBB_BuildOrderSearchParameters     _params;                      //parameters that will be used in this search
-	DFBB_BuildOrderSearchResults        _results;                     //the results of the search so far
-					
-    Timer                               _searchTimer;
-    BuildOrder                          _buildOrder;
+  class DFBB_BuildOrderStackSearch {
+    DFBB_BuildOrderSearchParameters _params; //parameters that will be used in this search
+    DFBB_BuildOrderSearchResults _results; //the results of the search so far
 
-    std::vector<StackData>              _stack;
-    size_t                              _depth;
+    Timer _searchTimer;
+    BuildOrder _buildOrder;
 
-    bool                                _firstSearch;
+    std::vector<StackData> _stack;
+    size_t _depth;
 
-    bool                                _wasInterrupted;
-    
-    void                                updateResults(const GameState & state);
-    bool                                isTimeOut();
-    void                                calculateRecursivePrerequisites(const ActionType & action, ActionSet & all);
-    void                                generateLegalActions(const GameState & state, ActionSet & legalActions);
-	std::vector<ActionType>             getBuildOrder(GameState & state);
-    UnitCountType                       getRepetitions(const GameState & state, const ActionType & a);
-    ActionSet                           calculateRelevantActions();
+    bool _firstSearch;
 
-public:
-	
-	DFBB_BuildOrderStackSearch(const DFBB_BuildOrderSearchParameters & p);
-	
+    bool _wasInterrupted;
+
+    void updateResults(const GameState& state);
+    bool isTimeOut();
+    void calculateRecursivePrerequisites(const ActionType& action, ActionSet& all);
+    void generateLegalActions(const GameState& state, ActionSet& legalActions);
+    std::vector<ActionType> getBuildOrder(GameState& state);
+    UnitCountType getRepetitions(const GameState& state, const ActionType& a);
+    ActionSet calculateRelevantActions();
+
+  public:
+
+    DFBB_BuildOrderStackSearch(const DFBB_BuildOrderSearchParameters& p);
+
     void setTimeLimit(double ms);
-	void search();
-    const DFBB_BuildOrderSearchResults & getResults() const;
-	
-	void DFBB();
-	
-	
-};
+    void search();
+    const DFBB_BuildOrderSearchResults& getResults() const;
+
+    void DFBB();
+
+
+  };
 }

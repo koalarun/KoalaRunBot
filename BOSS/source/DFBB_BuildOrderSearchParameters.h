@@ -5,17 +5,15 @@
 #include "GameState.h"
 #include "DFBB_BuildOrderSearchSaveState.h"
 
-namespace BOSS
-{
+namespace BOSS {
 
-class DFBB_BuildOrderSearchParameters
-{
+  class DFBB_BuildOrderSearchParameters {
 
 
     void init();
 
 
-public:
+  public:
     RaceID race;
 
     //      Flag which determines whether or not doubling macro actions will be used in search.
@@ -26,7 +24,7 @@ public:
     //      true:  macro actions are used, stored in repetitionValues array
     //      false: macro actions not used, all actions will be carried out once
     bool useRepetitions;
-    Vec<UnitCountType,Constants::MAX_ACTIONS> repetitionValues;
+    Vec<UnitCountType, Constants::MAX_ACTIONS> repetitionValues;
 
     //      Flag which determines whether increasing repetitions will be used in search
     //      Increasing repetitions means the reptition value will be 1 until we have at least
@@ -38,7 +36,7 @@ public:
     //      true:  increasing repetitions are used
     //      false: increasing repetitions not used
     bool useIncreasingRepetitions;
-    Vec<UnitCountType,Constants::MAX_ACTIONS> repetitionThresholds;
+    Vec<UnitCountType, Constants::MAX_ACTIONS> repetitionThresholds;
 
     //      Flag which determines whether or not we always make workers during search
     //      This abstraction changes the search so that it always makes a worker if it is able to. It
@@ -94,17 +92,17 @@ public:
 
 
     // alternate constructor
-    DFBB_BuildOrderSearchParameters(const RaceID & r = Races::None);
+    DFBB_BuildOrderSearchParameters(const RaceID& r = Races::None);
 
-    void setMaxActions(const ActionType & a,const UnitCountType & max);
-    void setRepetitions(const ActionType & a,const UnitCountType & repetitions);
-    void setRepetitionThreshold(const ActionType & a,const UnitCountType & thresh);
+    void setMaxActions(const ActionType& a, const UnitCountType& max);
+    void setRepetitions(const ActionType& a, const UnitCountType& repetitions);
+    void setRepetitionThreshold(const ActionType& a, const UnitCountType& thresh);
 
-    const UnitCountType & getRepetitions(const ActionType & a);
-    const UnitCountType & getMaxActions(const ActionType & a);
-    const UnitCountType & getRepetitionThreshold(const ActionType & a);
+    const UnitCountType& getRepetitions(const ActionType& a);
+    const UnitCountType& getMaxActions(const ActionType& a);
+    const UnitCountType& getRepetitionThreshold(const ActionType& a);
 
     std::string toString() const;
-};
+  };
 
 }

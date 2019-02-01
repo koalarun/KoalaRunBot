@@ -11,9 +11,9 @@ namespace KoalaRunBot {
     BWAPI::Unitset workers_;
     std::map<BWAPI::Unit, enum WorkerJob> worker_2_job_;
 
+    WorkerCenter();
 		void ShiftCompleteWorker();
   public:
-    WorkerCenter();
     ~WorkerCenter();
 
 		//get set

@@ -48,7 +48,7 @@ void GameCommander::Update() {
   // -- Managers that act on information. --
 
   timer_manager_.startTimer(TimerManager::Search);
-  BOSSManager::Instance().update(35 - timer_manager_.getMilliseconds());
+  BOSSManager::Instance().update(35 - timer_manager_.getTotalMilliseconds());
   timer_manager_.stopTimer(TimerManager::Search);
 
   timer_manager_.startTimer(TimerManager::Worker);
